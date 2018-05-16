@@ -1,6 +1,6 @@
 # jobplus6-12
 
-LouPlus Team X https://www.shiyanlou.com/louplus/python
+LouPlus Team 12 https://www.shiyanlou.com/louplus/python
 
 ## Contributors
 
