@@ -8,4 +8,4 @@ LouPlus Team 12 https://www.shiyanlou.com/louplus/python
 * [GeekWYF](https://github.com/GeekWYF)
 
 * [C](https://github.com/sillysilly)
-  [MingGeng](https://github.com/MingGeng)
+* [MingGeng](https://github.com/MingGeng)
