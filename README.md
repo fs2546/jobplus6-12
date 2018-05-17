@@ -9,4 +9,4 @@ LouPlus Team 12 https://www.shiyanlou.com/louplus/python
 
 * [C](https://github.com/sillysilly)
 * [MingGeng](https://github.com/MingGeng)
-* [kimaprikose] (https://github.com/fs2546)
+* [kimaprikose](https://github.com/fs2546)
