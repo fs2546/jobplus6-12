@@ -16,19 +16,19 @@ class LoginForm(FlaskForm):
         if user and not user.check_password(field.data):
             raise ValidationError('密码错误')
 class RegisterForm(FlaskForm):
-    name = StringField('???', validators=[Required(), Length(3, 24)])
-    email = StringField('??', validators=[Required(), Email()])
-    password = PasswordField('??', validators=[Required(), Length(6, 24)])
-    repeat_password = PasswordField('????', validators=[Required(), EqualTo('password')])
-    submit = SubmitField('??')
+    name = StringField('用户名', validators=[Required(), Length(3, 24)])
+    email = StringField('邮箱', validators=[Required(), Email()])
+    password = PasswordField('密码', validators=[Required(), Length(6, 24)])
+    repeat_password = PasswordField('重复密码', validators=[Required(), EqualTo('password')])
+    submit = SubmitField('提交')
 
     def validate_username(self, field):
         if User.query.filter_by(name=field.data).first():
-            raise ValidationError('??????')
+            raise ValidationError('名字已经存在')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
-            raise ValidationError('??????')
+            raise ValidationError('邮箱已经存在')
 
     def create_user(self):
         user = User(name=self.name.data,
@@ -40,18 +40,18 @@ class RegisterForm(FlaskForm):
 
 
 class UserProfileForm(FlaskForm):
-    real_name = StringField('??')
-    email = StringField('??', validators=[Required(), Email()])
-    password = PasswordField('??(???????)')
-    phone = StringField('???')
-    work_years = IntegerField('????')
-    resume_url = StringField('????')
-    submit = SubmitField('??')
+    real_name = StringField('姓名')
+    email = StringField('邮箱', validators=[Required(), Email()])
+    password = PasswordField('密码(不填写保持不变)')
+    phone = StringField('手机号')
+    work_years = IntegerField('工作年限')
+    resume_url = StringField('简历地址')
+    submit = SubmitField('提交')
 
     def validate_phone(self, field):
         phone = field.data
         if phone[:2] not in ('13', '15', '18') and len(phone) != 11:
-            raise ValidationError('?????????')
+            raise ValidationError('请输入有效的手机号')
 
     def updated_profile(self, user):
         user.real_name = self.real_name.data
@@ -66,21 +66,21 @@ class UserProfileForm(FlaskForm):
 
 
 class CompanyProfileForm(FlaskForm):
-    name = StringField('????')
-    email = StringField('??', validators=[Required(), Email()])
-    password = PasswordField('??(???????)')
+    name = StringField('企业名称')
+    email = StringField('邮箱', validators=[Required(), Email()])
+    password = PasswordField('密码(不填写保持不变)')
     slug = StringField('Slug', validators=[Required(), Length(3, 24)])
-    location = StringField('??', validators=[Length(0, 64)])
-    site = StringField('????', validators=[Length(0, 64)])
+    location = StringField('地址', validators=[Length(0, 64)])
+    site = StringField('公司网站', validators=[Length(0, 64)])
     logo = StringField('Logo')
-    description = StringField('?????', validators=[Length(0, 100)])
-    about = TextAreaField('????', validators=[Length(0, 1024)])
-    submit = SubmitField('??')
+    description = StringField('一句话描述', validators=[Length(0, 100)])
+    about = TextAreaField('公司详情', validators=[Length(0, 1024)])
+    submit = SubmitField('提交')
 
     def validate_phone(self, field):
         phone = field.data
         if phone[:2] not in ('13', '15', '18') and len(phone) != 11:
-            raise ValidationError('?????????')
+            raise ValidationError('请输入有效手机号')
 
     def updated_profile(self, user):
         user.name = self.name.data

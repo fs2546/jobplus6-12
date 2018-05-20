@@ -34,7 +34,7 @@ class User(Base, UserMixin):
     resume_url = db.Column(db.String(64))
     detail = db.relationship('CompanyDetail', uselist=False)
     def __repr__(self):
-        return '<User:{}>'.format(self.username)
+        return '<User:{}>'.format(self.name)
     @property
     def password(self):
         return self._password
@@ -49,6 +49,9 @@ class User(Base, UserMixin):
     @property 
     def is_company(self):
         return self.role == self.ROLE_COMPANY
+    @property
+    def is_staff(self):
+        return self.role == self.ROLE_USER
 class Resume(Base):
     __tablename__ = 'resume'
     id = db.Column(db.Integer, primary_key=True)

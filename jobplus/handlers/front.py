@@ -4,7 +4,7 @@ from jobplus.forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user, login_required
 
 
-front = Blueprint('front', __name__, url_prefix='/')
+front = Blueprint('front', __name__)
 
 @front.route('/')
 def index():
@@ -35,7 +35,7 @@ def userregister():
     form = RegisterForm()
     if form.validate_on_submit():
         form.create_user()
-        flash(u'注册成功，请登录!', 'success')
+        flash('注册成功，请登录!', 'success')
         return redirect(url_for('.login'))
     return render_template('userregister.html', form=form)
 @front.route('/companyregister', methods=['GET', 'POST'])
@@ -47,7 +47,7 @@ def companyregister():
         copany_user.role = User.ROLE_COMPANY
         db.session.add(company_user)
         db.session.commit()
-        flash(u'注册成功，请登录!', 'success')
+        flash('注册成功，请登录!', 'success')
         return redirect(url_for('.login'))
     return render_template('companyregister.html', form=form)
 
@@ -55,7 +55,7 @@ def companyregister():
 @login_required
 def logout():
     logout_user()
-    flash(u'您已经退出登录', 'success')
+    flash('您已经退出登录', 'success')
     return redirect(url_for('.index'))
 
 
